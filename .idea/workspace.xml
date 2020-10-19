@@ -20,12 +20,18 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DatabaseDriversLRU" value="sqlite" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/src/Core/API" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Elève\Desktop\PocketMine-MP-stable\Station\PocketMine-MP-3.15.2\plugins\Station_Core" />
+      <recent name="C:\Users\Elève\Desktop\PocketMine-MP-stable\Station\PocketMine-MP-3.15.2\plugins\Station_Core\src" />
+      <recent name="C:\Users\Elève\Desktop\PocketMine-MP-stable\Station\PocketMine-MP-3.15.2\plugins\Station_Core\src\Core" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Elève\Desktop\PocketMine-MP-stable\Station\PocketMine-MP-3.15.2\plugins\Station_Core\src\Core\API" />
     </key>
@@ -40,7 +46,7 @@
       <updated>1602876409975</updated>
       <workItem from="1602876411706" duration="1226000" />
       <workItem from="1602956744481" duration="505000" />
-      <workItem from="1603034926691" duration="4144000" />
+      <workItem from="1603034926691" duration="15858000" />
     </task>
     <servers />
   </component>
@@ -52,9 +58,41 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="309" y="42" key="#Inspections/0.0.1366.728@0.0.1366.728" timestamp="1602876932668" />
-    <state x="517" y="287" key="NewPhpFileDialog" timestamp="1602877014833">
+    <state x="59" y="205" key="#SQL_Dialects" timestamp="1603053630869">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="517" y="287" key="NewPhpFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1602877014833" />
+    <state x="59" y="205" key="#SQL_Dialects/0.0.1366.728@0.0.1366.728" timestamp="1603053630869" />
+    <state x="123" y="220" key="#SQL_Resolution_Scopes" timestamp="1603056800861">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="123" y="220" key="#SQL_Resolution_Scopes/0.0.1366.728@0.0.1366.728" timestamp="1603056800861" />
+    <state x="275" y="22" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1603053652731">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="275" y="22" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.728@0.0.1366.728" timestamp="1603053652731" />
+    <state x="441" y="166" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1603057138325">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="441" y="166" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.728@0.0.1366.728" timestamp="1603057138325" />
+    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1603059292485">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="413" y="119" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1366.728@0.0.1366.728" timestamp="1603059292485" />
+    <state width="196" height="457" key="HiddenNamespacesPopup" timestamp="1603053675478">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state width="196" height="457" key="HiddenNamespacesPopup/0.0.1366.728@0.0.1366.728" timestamp="1603053675478" />
+    <state x="288" y="87" key="NewPhpClassDialog" timestamp="1603055590768">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="288" y="87" key="NewPhpClassDialog/0.0.1366.728@0.0.1366.728" timestamp="1603055590768" />
+    <state x="517" y="287" key="NewPhpFileDialog" timestamp="1603109079604">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="517" y="287" key="NewPhpFileDialog/0.0.1366.728@0.0.1366.728" timestamp="1603109079604" />
+    <state x="430" y="0" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog" timestamp="1603056827764">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="430" y="0" key="com.intellij.database.view.ui.AbstractDbRefactoringDialog/0.0.1366.728@0.0.1366.728" timestamp="1603056827764" />
   </component>
 </project>

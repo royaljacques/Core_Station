@@ -1,4 +1,5 @@
 name: Core_
 version: 0.0.1
-main: Core/Main
+main: Core\Main
+api: 3.0.0
 description: Plugin Faction pour le serveur STATION
