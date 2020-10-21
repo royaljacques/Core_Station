@@ -6,6 +6,7 @@ use Core\Form\TbanUi;
 use Core\Main;
 use pocketmine\command\CommandSender;
 use pocketmine\command\PluginCommand;
+use pocketmine\entity\Entity;
 use pocketmine\Player;
 use pocketmine\plugin\Plugin;
 use pocketmine\Server;
@@ -176,6 +177,59 @@ class Admin extends PluginCommand
 		$form->addButton("gamemode 2");
 		$form->addButton("gamemode 3");
 		$form->sendToPlayer($player);
+
+	}
+	public function VanishUI($player){
+
+
+		$form = new SimpleForm(function (Player $player, int $data = null) {
+
+			$result = $data;
+
+			if($result === null){
+
+				return true;
+
+			}
+
+			switch($result){
+
+				case 0:
+
+					$player->setDataFlag(Entity::DATA_FLAGS, Entity::DATA_FLAG_INVISIBLE, true);
+
+					$player->setNameTagVisible(false);
+
+					$player->addTitle("§aVanish", "§fHas Been Enable");
+
+					break;
+
+				case 1:
+
+					$player->setDataFlag(Entity::DATA_FLAGS, Entity::DATA_FLAG_INVISIBLE, false);
+
+					$player->setNameTagVisible(true);
+
+					$player->addTitle("§cVanish", "§fHas Been Disable");
+
+					break;
+
+
+
+			}
+
+		});
+
+		$form->setTitle("§b§lVanish");
+
+		$form->addButton("§eVANISH §aON\n§7§oTap To Enable",0,"textures/ui/check");
+
+		$form->addButton("§eVANISH §cOFF\n§7§oGap To Disable",0,"textures/ui/cancel");
+
+
+		$form->sendToPlayer($player);
+
+		return true;
 
 	}
 
