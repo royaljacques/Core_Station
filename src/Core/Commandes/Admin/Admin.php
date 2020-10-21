@@ -2,8 +2,8 @@
 namespace Core\Commandes\Admin;
 
 use Core\API\FormAPI\SimpleForm;
+use Core\Form\TbanUi;
 use Core\Main;
-use pocketmine\command\Command;
 use pocketmine\command\CommandSender;
 use pocketmine\command\PluginCommand;
 use pocketmine\Player;
@@ -53,18 +53,10 @@ class Admin extends PluginCommand
 			}
 			switch($result) {
 				case 0:
-					$player->hasPermission("Guide");
-					$this->GuideForm($player);
-					break;
-				case 1:
 					$player->hasPermission("Modo");
 					$this->ModoForm($player);
 					break;
-				case 2:
-					$player->hasPermission("Super_Modo");
-					$this->SuperModoForm($player);
-					break;
-				case 3:
+				case 1:
 					$player->hasPermission("Op");
 					$this->OpForm($player);
 					break;
@@ -73,16 +65,10 @@ class Admin extends PluginCommand
 			return true;
 		});
 		$form->setTitle("Index des Staffs ");
-		$form->addButton("§1§l✶ Guides ✶");
 		$form->addButton("§1§l✶ Modérateur ✶");
-		$form->addButton("§1§l✶ Super-modérateur ✶");
 		$form->addButton("§1§l✶ Op ✶");
 		$form->sendToPlayer($player);
 
-	}
-
-	public function GuideForm($player)
-	{
 	}
 
 	public function ModoForm($player)
@@ -94,42 +80,23 @@ class Admin extends PluginCommand
 			}
 			switch($result) {
 				case 0:
-					$this->plugin->openPlayerListUI($player);
+					Main::getInstance()->openPlayerListUI($player);
 					break;
 				case 1:
 					$this->plugin->openTcheckUI($player);
 					break;
+				case 2:
+					$this->openGamemodeUi($player);
 			}
 			return true;
 		});
 		$form->setTitle("Modérateur");
 		$form->addButton("TbanUi");
 		$form->addButton("TcheckUi");
+		$form->addButton("Gamemode ");
 		$form->sendToPlayer($player);
 	}
 
-	public function SuperModoForm($player)
-	{
-		$form = new SimpleForm(function (Player $player, int $data = null){
-			$result = $data;
-			if($result === null){
-				return true;
-			}
-			switch($result) {
-				case 0:
-					$this->plugin->openPlayerListUI($player);
-					break;
-				case 1:
-					$this->plugin->openTcheckUI($player);
-					break;
-			}
-			return true;
-		});
-		$form->setTitle("Modérateur");
-		$form->addButton("TbanUi");
-		$form->addButton("TcheckUi");
-		$form->sendToPlayer($player);
-	}
 
 	public function OpForm($player)
 	{
@@ -140,10 +107,10 @@ class Admin extends PluginCommand
 			}
 			switch($result) {
 				case 0:
-					$this->plugin->openPlayerListUI($player);
+					Main::getInstance()->openPlayerListUI($player);
 					break;
 				case 1:
-					$this->plugin->openTcheckUI($player);
+					Main::getInstance()->openTcheckUI($player);
 					break;
 			}
 			return true;
@@ -152,6 +119,64 @@ class Admin extends PluginCommand
 		$form->addButton("TbanUi");
 		$form->addButton("TcheckUi");
 		$form->sendToPlayer($player);
+	}
+
+	public function openGamemodeUi(Player $player)
+	{
+		$form = new SimpleForm(function (Player $player, int $data = null){
+			$result = $data;
+			if($result === null){
+				return true;
+			}
+			switch($result){
+				case 0:
+
+					$player->setGamemode(0);
+
+					$player->sendMessage("§aSucces! §fYour Gamemode Has Been Changed To §cSurvival");
+
+					$player->addTitle("§cSurvival", "§fYour Gamemode Is Survival");
+
+					break;
+
+				case 1:
+
+					$player->setGamemode(1);
+
+					$player->sendMessage("§aSucces! §fYour Gamemode Has Been Changed To §aCreative");
+
+					$player->addTitle("§aCreative", "§fYour Gamemode Is Creative");
+
+					break;
+
+				case 2:
+
+					$player->setGamemode(2);
+
+					$player->sendMessage("§aSucces! §fYour Gamemode Has Been Changed To §bAdventure");
+
+					$player->addTitle("§bAdventure", "§fYour Gamemode Is Adventure");
+
+					break;
+
+				case 3:
+
+					$player->setGamemode(3);
+
+					$player->sendMessage("§aSucces! §fYour Gamemode Has Been Changed To §eSpecator");
+
+					$player->addTitle("§eSpectator", "§fYour Gamemode Is Spectator");
+
+					break;
+			}
+			return true;
+		});
+		$form->setTitle("Gamemode");
+		$form->addButton("Gamemode 1");
+		$form->addButton("gamemode 2");
+		$form->addButton("gamemode 3");
+		$form->sendToPlayer($player);
+
 	}
 
 }
