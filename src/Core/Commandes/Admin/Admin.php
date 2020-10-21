@@ -88,6 +88,10 @@ class Admin extends PluginCommand
 					break;
 				case 2:
 					$this->openGamemodeUi($player);
+					break;
+				case 3:
+					$this->VanishUI($player);
+					break
 			}
 			return true;
 		});
@@ -95,6 +99,7 @@ class Admin extends PluginCommand
 		$form->addButton("TbanUi");
 		$form->addButton("TcheckUi");
 		$form->addButton("Gamemode ");
+		$form->addButton("Vanish ");
 		$form->sendToPlayer($player);
 	}
 
