@@ -6,8 +6,8 @@ namespace Core;
 use Core\API\FormAPI\CustomForm;
 use Core\API\FormAPI\SimpleForm;
 use Core\Commandes\Admin\Admin;
+use Core\Commandes\Admin\Clear;
 use Core\Commandes\Player\feed;
-use hmmhmmmm\market\ui\MarketChest;
 use pocketmine\event\entity\EntityDamageByEntityEvent;
 use pocketmine\event\entity\EntityDamageEvent;
 use pocketmine\event\Listener;
@@ -28,32 +28,9 @@ class Main extends PluginBase implements Listener
 	public $message;
 	private $targetPlayer = [];
 	public $staffList = [];
-	private $targetPlayerTp = [];
 	private static $instance;
-
-
-	//market
-	private $prefix = "?";
-	private $facebook = "§cwithout";
-	private $youtube = "§cwithout";
-	private $discord = "§cwithout";
-	private $language = null;
-	private $data = null;
-	public $array = [];
-	private $marketform = null;
-	private $moneyapi = null;
-	private $marketchest = null;
-	public $eventListener = null;
-
-	public $database;
-
-	private $langClass = [
-		"thai",
-		"english"
-	];
 	public function onEnable()
 	{
-		$this->marketchest = new MarketChest($this);
 		self::$instance = $this;
 		@mkdir($this->getDataFolder());
 		@mkdir($this->getDataFolder("Player/"));
@@ -78,8 +55,8 @@ class Main extends PluginBase implements Listener
 	public function CommandesLoaderAdmin()
 	{
 		$this->getServer()->getCommandMap()->register("admin", new Admin("admin", $this));
+		$this->getServer()->getCommandMap()->register("clear", new Clear("clear", $this));
 	}
-
 	public function LoadConfig()
 	{
 		$this->message = (new Config($this->getDataFolder() . "Message.yml", Config::YAML, array(
@@ -104,7 +81,6 @@ class Main extends PluginBase implements Listener
 	{
 
 	}
-
 	public function openPlayerListUI($player){
 		$api = $this->getServer()->getPluginManager()->getPlugin("FormAPI");
 		$form = new SimpleForm(function (Player $player, $data = null){
@@ -175,7 +151,7 @@ class Main extends PluginBase implements Listener
 			}
 		});
 		$list[] = $this->targetPlayer[$player->getName()];
-		$form->setTitle(TextFormat::BOLD . "[§4§l[§nAet§5hB§9an]§r §3TEMP BAN");
+		$form->setTitle(TextFormat::BOLD . "§dSTARS§r §3TEMP BAN");
 		$form->addDropdown("\nCible", $list);
 		$form->addSlider("Jour/s", 0, 30, 1);
 		$form->addSlider("Heure/s", 0, 24, 1);
@@ -272,7 +248,7 @@ class Main extends PluginBase implements Listener
 	/**
 	 * @return Main
 	 */
-	public static function getInstance()
+	public static function getInstance() : Main
 	{
 		return self::$instance;
 	}

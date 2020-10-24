@@ -40,39 +40,13 @@ class Admin extends PluginCommand
 		if(!$player->hasPermission("Staff")) {
 			$player->sendMessage("tu n'as pas la permission d'utiliser cette commande ");
 		}else{
-			$this->AdminIndexForm($player);
+			$this->StaffForm($player);
 		}
 		return true;
 	}
 
-	public function AdminIndexForm($player){
-		Server::getInstance()->getPluginManager()->getPlugin("EconomyAPI");
-		$form = new SimpleForm(function (Player $player, int $data = null){
-			$result = $data;
-			if($result === null){
-				return true;
-			}
-			switch($result) {
-				case 0:
-					$player->hasPermission("Modo");
-					$this->ModoForm($player);
-					break;
-				case 1:
-					$player->hasPermission("Op");
-					$this->OpForm($player);
-					break;
 
-			}
-			return true;
-		});
-		$form->setTitle("Index des Staffs ");
-		$form->addButton("§1§l✶ Modérateur ✶");
-		$form->addButton("§1§l✶ Op ✶");
-		$form->sendToPlayer($player);
-
-	}
-
-	public function ModoForm($player)
+	public function StaffForm($player)
 	{
 		$form = new SimpleForm(function (Player $player, int $data = null){
 			$result = $data;
@@ -91,7 +65,7 @@ class Admin extends PluginCommand
 					break;
 				case 3:
 					$this->VanishUI($player);
-					break
+					break;
 			}
 			return true;
 		});
@@ -100,30 +74,6 @@ class Admin extends PluginCommand
 		$form->addButton("TcheckUi");
 		$form->addButton("Gamemode ");
 		$form->addButton("Vanish ");
-		$form->sendToPlayer($player);
-	}
-
-
-	public function OpForm($player)
-	{
-		$form = new SimpleForm(function (Player $player, int $data = null){
-			$result = $data;
-			if($result === null){
-				return true;
-			}
-			switch($result) {
-				case 0:
-					Main::getInstance()->openPlayerListUI($player);
-					break;
-				case 1:
-					Main::getInstance()->openTcheckUI($player);
-					break;
-			}
-			return true;
-		});
-		$form->setTitle("Modérateur");
-		$form->addButton("TbanUi");
-		$form->addButton("TcheckUi");
 		$form->sendToPlayer($player);
 	}
 
@@ -227,9 +177,9 @@ class Admin extends PluginCommand
 
 		$form->setTitle("§b§lVanish");
 
-		$form->addButton("§eVANISH §aON\n§7§oTap To Enable",0,"textures/ui/check");
+		$form->addButton("§eVANISH §aON\n§7§oTap To Enable");
 
-		$form->addButton("§eVANISH §cOFF\n§7§oGap To Disable",0,"textures/ui/cancel");
+		$form->addButton("§eVANISH §cOFF\n§7§oGap To Disable");
 
 
 		$form->sendToPlayer($player);
