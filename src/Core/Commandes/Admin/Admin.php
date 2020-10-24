@@ -1,6 +1,7 @@
 <?php
 namespace Core\Commandes\Admin;
 
+use Core\API\FormAPI\CustomForm;
 use Core\API\FormAPI\SimpleForm;
 use Core\Form\TbanUi;
 use Core\Main;
@@ -18,6 +19,7 @@ class Admin extends PluginCommand
 	 * @var Plugin
 	 */
 	private $plugin;
+	private $targetPlayer = [];
 
 	public function __construct(string $name, Plugin $plugin)
 	{
@@ -55,10 +57,10 @@ class Admin extends PluginCommand
 			}
 			switch($result) {
 				case 0:
-					Main::getInstance()->openPlayerListUI($player);
+					$this->BanForm($player);
 					break;
 				case 1:
-					$this->plugin->openTcheckUI($player);
+					$this->MuteForm($player);
 					break;
 				case 2:
 					$this->openGamemodeUi($player);
@@ -66,14 +68,62 @@ class Admin extends PluginCommand
 				case 3:
 					$this->VanishUI($player);
 					break;
+				case 4:
+					$this->Teleportui($player);
+					break;
 			}
 			return true;
 		});
-		$form->setTitle("Modérateur");
+		$form->setTitle("Staff Ui");
 		$form->addButton("TbanUi");
-		$form->addButton("TcheckUi");
+		$form->addButton("tMute");
 		$form->addButton("Gamemode ");
 		$form->addButton("Vanish ");
+		$form->addButton("Téléport ");
+
+
+		$form->sendToPlayer($player);
+	}
+	public function MuteForm($player)
+	{
+		$form = new SimpleForm(function (Player $player, int $data = null) {
+			$result = $data;
+			if ($result === null) {
+				return true;
+			}
+			switch ($result) {
+				case 0:
+					Main::getInstance()->openPlayerMuteListUI($player);
+					break;
+				case 1:
+					Main::getInstance()->openTcheckMuteUI($player);
+					break;
+			}
+			return true;
+		});
+		$form->addButton("Tmute");
+		$form->addButton("TCheckmute");
+		$form->sendToPlayer($player);
+}
+	public function BanForm($player)
+	{
+		$form = new SimpleForm(function (Player $player, int $data = null) {
+			$result = $data;
+			if ($result === null) {
+				return true;
+			}
+			switch ($result) {
+				case 0:
+					Main::getInstance()->openPlayerListUI($player);
+					break;
+				case 1:
+					Main::getInstance()->openTcheckUI($player);
+					break;
+			}
+			return true;
+		});
+		$form->addButton("Tban");
+		$form->addButton("TcheckBan");
 		$form->sendToPlayer($player);
 	}
 
@@ -129,8 +179,8 @@ class Admin extends PluginCommand
 		});
 		$form->setTitle("Gamemode");
 		$form->addButton("Gamemode 1");
-		$form->addButton("gamemode 2");
-		$form->addButton("gamemode 3");
+		$form->addButton("Gamemode 2");
+		$form->addButton("Gamemode 3");
 		$form->sendToPlayer($player);
 
 	}
@@ -187,5 +237,34 @@ class Admin extends PluginCommand
 		return true;
 
 	}
+	public function Teleportui($player){
+		$api = Main::getInstance()->getServer()->getPluginManager()->getPlugin("FormAPI");
+		$form = new SimpleForm(function (Player $player, $data = null){
+			$target = $data;
+			if($target === null){
+				return true;
+			}
+			$this->targetPlayer[$player->getName()] = $target;
+			$this->OnTeleport($player);
+			return true;
+		});
+		$form->setTitle("Choisis un joeur");
+		$form->setContent("Liste des Joueurs");
+		foreach(Main::getInstance()->getServer()->getOnlinePlayers() as $online){
+			$form->addButton($online->getName(), -1, "", $online->getName());
+		}
+		$form->sendToPlayer($player);
+		return $form;
+	}
 
+	public function OnTeleport(Player $player)
+	{
+		if(isset($this->targetPlayer[$player->getName()])){
+			$target = Main::getInstance()->getServer()->getPlayerExact($this->targetPlayer[$player->getName()]);
+			$target = $target->getPlayer();
+			$player->teleport($target);
+			$player->sendMessage("Tu a bien été tp vers ". $target->getName());
+		}
+		return true;
+	}
 }

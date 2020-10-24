@@ -1,4 +1,5 @@
 <?php
+namespace Core\Event;
 
 use Core\Main;
 use pocketmine\event\Listener;
