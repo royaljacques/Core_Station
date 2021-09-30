@@ -1,0 +1,1 @@
+this is a code that a server asked me to merge several plugins. unfortunately this plugin has been dragging for a long time and nothing is moving so I put it in open source, if it can help the developer to better understand the usefulness of a core
